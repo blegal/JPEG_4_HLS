@@ -1,4 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 build
+cmake
 .idea
+
+ofile.jpg
