@@ -19,6 +19,7 @@ SET (SOURCE_FILES \\
         ./src/Serializer/Serializer.cpp \\
         ./src/ZigZag/ZigZag.cpp \\
         ./src/Quantizer/Quantizer.cpp \\
+        ./src/Encoder/Encoder.cpp \\
         ./src/main.cpp)
 
 add_executable(JPEG_processing ${SOURCE_FILES})

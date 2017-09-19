@@ -20,7 +20,7 @@ public:
 	int width;
 	int height;
 
-	sc_fifo_out<int> s; // pixel values
+	sc_fifo_out<unsigned char> s; // pixel values
 	sc_fifo_out<int> p; // parameters
 
 	DataSource(sc_module_name nm, const std::string ifile) : sc_module(nm)
@@ -45,5 +45,6 @@ public:
 
   	SC_HAS_PROCESS(DataSource);
 
+private:
     void do_gen();
 };

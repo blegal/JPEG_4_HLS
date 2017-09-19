@@ -169,13 +169,6 @@ static int jo_processDU(
 {
     const unsigned short EOB[2]       = { HTAC[0x00][0], HTAC[0x00][1] };
     const unsigned short M16zeroes[2] = { HTAC[0xF0][0], HTAC[0xF0][1] };
-//    int DU[64];
-
-//    fdct_int32(i_data);
-
-//    QuantificationFX( i_data );
-
-//    zigzag(i_data, DU);
 
     //
     // Encodage RLE + Huffman, cela fait partie du code

@@ -18,7 +18,7 @@ public:
     sc_in<bool> reset;
 
     sc_fifo_in <int> e;
-    sc_fifo_out<int> s;
+    sc_fifo_out<signed short> s;
 
 	SC_CTOR(ZigZag)
 	{

@@ -10,7 +10,7 @@
 
 SC_MODULE(DataSink)
 {
-	sc_fifo_in<int> e; // pixel values
+	sc_fifo_in<signed short> e; // pixel values
 	sc_fifo_in<int> p; // parameters
 
 	void do_print();

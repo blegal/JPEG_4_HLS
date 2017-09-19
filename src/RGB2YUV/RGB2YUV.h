@@ -17,7 +17,7 @@ public:
     sc_in<bool> clk;
     sc_in<bool> reset;
 
-    sc_fifo_in <int> e;
+	sc_fifo_in <unsigned char> e;
     sc_fifo_out<int> s;
 
 	SC_CTOR(RGB2YUV)

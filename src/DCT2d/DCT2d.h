@@ -28,6 +28,6 @@ public:
 
 private:
     void do_action();
- };
+};
 
 #endif

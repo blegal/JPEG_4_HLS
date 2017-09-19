@@ -23,8 +23,8 @@ public:
     sc_in<bool> clk;
     sc_in<bool> reset;
 
-    sc_fifo_in <int> e;
-    sc_fifo_out<int> s;
+    sc_fifo_in <unsigned char > e;
+    sc_fifo_out<  signed short> s;
 
 	SC_CTOR(Encoder):
 		yuv ("RGB2YUV"   ),

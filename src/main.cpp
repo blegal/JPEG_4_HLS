@@ -1,11 +1,5 @@
 #include "./DataSource/DataSource.h"
-
-#include "./RGB2YUV/RGB2YUV.h"
-#include "./Serializer/Serializer.h"
-#include "./DCT2d/DCT2d.h"
-#include "./Quantizer/Quantizer.h"
-#include "./ZigZag/ZigZag.h"
-
+#include "./Encoder/Encoder.h"
 #include "./DataSink/DataSink.h"
 
 #include <opencv2/core/core.hpp>
@@ -41,49 +35,47 @@ double getPSNR(const cv::Mat& I1, const cv::Mat& I2)
 int main (int argc, char * argv []){
 	cout << "Initialisation des composants..." << endl;
 
-	std::string filename = "Perroquets.bmp";
+	std::string filename = "./data/Image_2.bmp";
 	if( argc > 1){
 		filename = argv[1];
 	}
 
 	DataSource src ("DataSource", filename);
-    RGB2YUV    yuv ("RGB2YUV"   );
-    Serializer ser ("Serializer");
-    DCT2d      dct ("DCT2d"     );
-    Quantizer  qtz ("Quantizer" );
-	ZigZag     zig ("ZigZag"    );
-	DataSink   dst ("DataSink"  );
+    Encoder    enc ("Encoder" );
+	DataSink   dst ("DataSink");
 
 	cout << "Mapping des composants..." << endl;
-	sc_fifo<int>  s1("FIFO_1", 65536);
-	sc_fifo<int>  s2("FIFO_2", 65536);
-	sc_fifo<int>  s3("FIFO_3", 65536);
-	sc_fifo<int>  s4("FIFO_4", 65536);
-	sc_fifo<int>  s5("FIFO_5", 65536);
-	sc_fifo<int>  s6("FIFO_6", 65536);
-	sc_fifo<int>  pa("FIFO_7", 65536);
+	sc_fifo<unsigned char> s1("FIFO_1", 65536);
+	sc_fifo<signed short>  s6("FIFO_6", 65536);
+	sc_fifo<int>           pa("FIFO_7", 65536);
 
-	src.s(s1); /* => */ yuv.e(s1);
-	yuv.s(s2); /* => */ ser.e(s2);
-	ser.s(s3); /* => */ dct.e(s3);
-	dct.s(s4); /* => */ qtz.e(s4);
-	qtz.s(s5); /* => */ zig.e(s5);
-	zig.s(s6); /* => */ dst.e(s6);
+    sc_clock clock("clock", 10, SC_NS, 0.5);
+    sc_signal< bool > reset;
+    reset = false;
 
+    enc.clk  (clock);
+    enc.reset(reset);
+    src.s(s1); /* => */ enc.e(s1);
+	enc.s(s6); /* => */ dst.e(s6);
 	src.p(pa); /* => */ dst.p(pa);
 
 	cout << "Lancement de la simulation du circuit..." << endl;
-	sc_start(1000,SC_MS);
+	sc_start(1, SC_MS);
 	cout << "Fin de la simulation du circuit..." << endl;
 
     cv::Mat im1 = cv::imread(filename.c_str());
     cv::Mat im2 = cv::imread("ofile.jpg");
-    cv::Mat diff_im = 16 * (im1 - im2);
+    cv::Mat diff_im = (im1 - im2);
+    cout << "PSNR = " << getPSNR(im1, im2) << endl;
 
     namedWindow( "Display window", cv::WINDOW_AUTOSIZE );
-    cv::imshow( "Display window", diff_im );
-    cout << "PSNR = " << getPSNR(im1, im2) << endl;
-    cv::waitKey(0);
+    char c = 'a';
+    do{
+        cv::imshow( "Display window", diff_im );
+        c = cv::waitKey(0);
+        if( c == 'a' ) diff_im *= 2;
+        if( c == 'z' ) diff_im /= 2;
+    }while( c != 'q' );
 
     return 0;
 }
