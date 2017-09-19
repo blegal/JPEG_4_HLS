@@ -2,6 +2,6 @@
 
 build
 cmake
+cmake-build-debug
 .idea
-
 ofile.jpg
