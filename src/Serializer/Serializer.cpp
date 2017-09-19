@@ -8,7 +8,7 @@
  */
 #include "Serializer.h"
 
-void Serializer::do_conversion(){
+void Serializer::do_action(){
 	int y[64];
 	int cr[64];
 	int cb[64];

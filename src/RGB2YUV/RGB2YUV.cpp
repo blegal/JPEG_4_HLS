@@ -41,7 +41,7 @@ void rgb2yuv(int vR, int vG, int vB, int ycbcr[3]){
 	ycbcr[2]  = LIMIT(fCr, -128, 127);
 }
 
-void RGB2YUV::do_conversion(){
+void RGB2YUV::do_action(){
 	int t[3];
 	while( true ){
 

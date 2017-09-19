@@ -24,7 +24,7 @@ const int conv[64] = {
 	53, 60, 61, 54, 47, 55, 62, 63
 };
 
-void ZigZag::do_conversion(){
+void ZigZag::do_action(){
 	int buffer[64];
 	while( true ){
         for(int k = 0; k < 64; k += 1){

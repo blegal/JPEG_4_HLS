@@ -6,19 +6,28 @@
  *  Copyright 2007 __MyCompanyName__. All rights reserved.
  *
  */
+#ifndef _quantizer_
+#define _quantizer_
+
 #include "systemc.h"
 
 SC_MODULE(Quantizer)
 {
 public:
-	sc_fifo_in <int> e;
+    sc_in<bool> clk;
+    sc_in<bool> reset;
+
+    sc_fifo_in <int> e;
     sc_fifo_out<int> s;
 
 	SC_CTOR(Quantizer)
 	{
-		SC_THREAD(do_conversion);
+        SC_CTHREAD(do_action, clk.pos());
+        reset_signal_is(reset, true);
 	}
 
 private:
-    void do_conversion();
+    void do_action();
  };
+
+#endif

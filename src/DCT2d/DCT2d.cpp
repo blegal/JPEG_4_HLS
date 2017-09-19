@@ -322,7 +322,7 @@ void fdct_int32( int *const In )
 */
 
 
-void DCT2d::do_conversion(){
+void DCT2d::do_action(){
 	int d[64];
 	while( true ){
 		// On attend de recevoir nos 64 donnees temporelles

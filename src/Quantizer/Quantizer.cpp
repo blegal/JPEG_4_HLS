@@ -34,7 +34,7 @@ static const unsigned char _UVTable[64] = {
        20,  20,  20,  20,  20,  20,  20,  20
 }; // why one more ?
 
-void Quantizer::do_conversion(){
+void Quantizer::do_action(){
 	while( true ){
 
 		for(int y=0;y<64;y++){
