@@ -13,12 +13,13 @@
 SC_MODULE(DataSource)          // module (class) declaration
 {
 private:
-	CvCapture* capture;
-	IplImage*  image;	
+//	CvCapture* capture;
+//	IplImage*  image;
+	std::string filename;
 
 public:
-	int width;
-	int height;
+//	int width;
+//	int height;
 
 	sc_fifo_out<unsigned char> s; // pixel values
 	sc_fifo_out<int> p; // parameters
@@ -26,6 +27,8 @@ public:
 	DataSource(sc_module_name nm, const std::string ifile) : sc_module(nm)
 	//SC_CTOR(ImageIn)
 	{
+		filename = ifile;
+/*
 	    capture = cvCreateFileCapture( ifile.c_str() );
 	    image   = cvQueryFrame( capture );
 	    printf("+ Image characteristics:\n");
@@ -40,6 +43,7 @@ public:
 	    printf("  -> height       = %d\n", image->height);
 		width   = image->width;
 		height  = image->height;
+		*/
 		SC_THREAD(do_gen);
 	}
 

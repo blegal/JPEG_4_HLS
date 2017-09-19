@@ -1,5 +1,6 @@
 #include "./DataSource/DataSource.h"
 #include "./Encoder/Encoder.h"
+#include "./Encoder/HardEncoder.h"
 #include "./DataSink/DataSink.h"
 
 #include <opencv2/core/core.hpp>
@@ -35,14 +36,18 @@ double getPSNR(const cv::Mat& I1, const cv::Mat& I2)
 int main (int argc, char * argv []){
 	cout << "Initialisation des composants..." << endl;
 
-	std::string filename = "./data/Image_2.bmp";
+	std::string filename = "../data/Image_2.bmp";
 	if( argc > 1){
 		filename = argv[1];
 	}
 
-	DataSource src ("DataSource", filename);
-    Encoder    enc ("Encoder" );
-	DataSink   dst ("DataSink");
+	DataSource  src ("DataSource", filename);
+#if 0
+    Encoder     enc ("Encoder" );
+#else
+    HardEncoder enc ("Encoder" );
+#endif
+	DataSink    dst ("DataSink");
 
 	cout << "Mapping des composants..." << endl;
 	sc_fifo<unsigned char> s1("FIFO_1", 65536);
@@ -66,6 +71,7 @@ int main (int argc, char * argv []){
     cv::Mat im1 = cv::imread(filename.c_str());
     cv::Mat im2 = cv::imread("ofile.jpg");
     cv::Mat diff_im = (im1 - im2);
+
     cout << "PSNR = " << getPSNR(im1, im2) << endl;
 
     namedWindow( "Display window", cv::WINDOW_AUTOSIZE );
