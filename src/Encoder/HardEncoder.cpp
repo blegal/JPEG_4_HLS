@@ -42,7 +42,7 @@ void HardEncoder::do_action()
 {
     int fileDescriptor = -1;
 
-#define MACOS
+//#define MACOS
 #ifdef MACOS
     vector<std::string> vs;
     vs.push_back("/dev/cu.usbserial-210274532517B");

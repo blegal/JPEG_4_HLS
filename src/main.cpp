@@ -3,15 +3,15 @@
 #include "./Encoder/HardEncoder.h"
 #include "./DataSink/DataSink.h"
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/imgcodecs.hpp>
+//#include <opencv2/highgui/highgui.hpp>
 
 #include <iostream>
 #include <math.h>
 
 using namespace std;
-
+/*
 double getPSNR(const cv::Mat& I1, const cv::Mat& I2)
 {
     cv::Mat s1;
@@ -32,8 +32,8 @@ double getPSNR(const cv::Mat& I1, const cv::Mat& I2)
         return psnr;
     }
 }
-
-int main (int argc, char * argv []){
+*/
+int sc_main (int argc, char * argv []){
 	cout << "Initialisation des composants..." << endl;
 
 	std::string filename = "../data/Image_2.bmp";
@@ -67,7 +67,7 @@ int main (int argc, char * argv []){
 	cout << "Lancement de la simulation du circuit..." << endl;
 	sc_start(1, SC_MS);
 	cout << "Fin de la simulation du circuit..." << endl;
-
+/*
     cv::Mat im1 = cv::imread(filename.c_str());
     cv::Mat im2 = cv::imread("ofile.jpg");
     cv::Mat diff_im = (im1 - im2);
@@ -82,6 +82,6 @@ int main (int argc, char * argv []){
         if( c == 'a' ) diff_im *= 2;
         if( c == 'z' ) diff_im /= 2;
     }while( c != 'q' );
-
+*/
     return 0;
 }
