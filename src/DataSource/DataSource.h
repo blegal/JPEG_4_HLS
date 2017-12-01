@@ -19,6 +19,7 @@ SC_MODULE(DataSource)          // module (class) declaration
 	DataSource(sc_module_name nm, const std::string ifile) : sc_module(nm)
 //	SC_CTOR(DataSource)
 	{
+        filename = ifile;
 		SC_THREAD(do_gen);
 	}
 

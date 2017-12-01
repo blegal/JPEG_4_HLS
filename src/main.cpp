@@ -42,7 +42,7 @@ int sc_main (int argc, char * argv []){
 	}
 
 	DataSource  src ("DataSource", filename);
-#if 0
+#if 1
     Encoder     enc ("Encoder" );
 #else
     HardEncoder enc ("Encoder" );

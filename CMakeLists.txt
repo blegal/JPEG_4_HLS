@@ -7,7 +7,7 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -I/usr/local/systemc-2.3.2/inc
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -march=native -mtune=native")
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_SIMULATION_ -Wno-unknown-pragmas -Wno-unused-parameter")
 SET (CMAKE_EXE_LINKER_FLAGS "")
-SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/usr/local/systemc-2.3.2/lib-linux64 -lsystemc -static")
+SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/usr/local/systemc-2.3.2/lib-linux64 -lsystemc")
 
 SET (SOURCE_FILES \\
         ./src/DataSource/DataSource.cpp \\
